@@ -1,6 +1,6 @@
 <?php
 
-	$articles = $db->query('SELECT * FROM articles');
+	$articles = $db->query('SELECT * FROM articles', 'App\Table\Article');
 
 	// echo "<pre>";
 	// var_dump($articles);
@@ -10,14 +10,17 @@
 <h1>Home</h1>
 
 
-<ul>
+<?php foreach ($articles as $key => $article) { ?>
 
-	<?php foreach ($articles as $key => $article) { ?>
-	<li>
-		<a href="?p=post&id=<?= $article['id_article']; ?>"><?= $article['title']; ?></a>
-	</li>
-	<?php } ?>
-	
-</ul>
+<h1>
+	<a href="<?= $article->url; ?>"><?= $article->title; ?></a>
+</h1>
 
-<p><a href="?p=single">Vers la single</a></p>
+<p>
+	<?= $article->extrait; ?>
+</p>
+
+<?php } ?>
+
+
+<!-- <p><a href="?p=single">Vers la single</a></p> -->
